@@ -1,0 +1,60 @@
+---
+
+# https://docs.influxdata.com/telegraf/v1.11/introduction/installation/
+
+- name: Ensure apt-transport-https
+  apt:
+    name: apt-transport-https
+    state: present
+    update_cache: yes
+
+- name: Ensure python dependencies
+  apt:
+    name: [ 'python-requests', 'python-pip' ]
+    state: present
+
+- name: Ensure Influx Data signing key
+  apt_key:
+    url: "{{ influx.repo }}"
+    state: present
+
+- name: Ensure Influx Data repo
+  apt_repository:
+    repo: deb https://repos.influxdata.com/debian {{ ansible_distribution_release }} stable
+    state: present
+    filename: influxdata
+
+- name: Ensure Telegraf pkg
+  apt:
+    name: telegraf
+    update_cache: yes
+    state: present
+
+- name: Push Telegraf config
+  template:
+    src: telegraf.conf.j2
+    dest: /etc/telegraf/telegraf.conf
+  notify: reload telegraf
+
+- name: Push Telegraf base input config
+  template:
+    src: inputs/input.base.conf.j2
+    dest: /etc/telegraf/telegraf.d/input.base.conf
+  notify: reload telegraf
+
+- name: Is Docker running ?
+  service_facts:
+
+- name: Push Telegraf docker input config if needed
+  template:
+    src: inputs/input.docker.conf.j2
+    dest: /etc/telegraf/telegraf.d/input.docker.conf
+  notify: reload telegraf
+  when: "'docker' in services"
+
+- name: Ensure Telegraf can access Docker socket
+  user: name=telegraf
+        group=telegraf
+        groups=docker
+        append=yes
+  when: "'docker' in services"

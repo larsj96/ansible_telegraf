@@ -1,0 +1,9 @@
+---
+
+db_name: telegraf
+db_user: telegraf_write
+db_pass: telegraf_write
+
+influx_host: influxdb1.nilsen-tech.com
+influx_proto: http
+influx_port: 8086

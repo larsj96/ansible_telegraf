@@ -1,0 +1,5 @@
+---
+- hosts: telegraf1.nilsen-tech.com
+  become: yes
+  roles:
+    - role: ../galaxy-telegraf

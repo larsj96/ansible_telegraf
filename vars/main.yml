@@ -1,0 +1,4 @@
+---
+
+influx:
+  repo: https://repos.influxdata.com/influxdb.key

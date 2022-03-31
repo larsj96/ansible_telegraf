@@ -1,0 +1,21 @@
+galaxy_info:
+  author: Wilfried OLLIVIER
+  description: Galaxy role to install telegraf with basic config on Debian
+  company: none
+
+  license: WTFPL
+
+  min_ansible_version: 2.4
+
+  platforms:
+  - name: Debian
+    versions:
+    - Stretch
+    - Buster
+
+  galaxy_tags:
+    - telegraf
+    - debian
+    - timeseries
+
+dependencies: []
