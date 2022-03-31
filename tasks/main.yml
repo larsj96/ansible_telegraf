@@ -8,11 +8,6 @@
     state: present
     update_cache: yes
 
-- name: Ensure python dependencies
-  apt:
-    name: [ 'python-requests', 'python-pip' ]
-    state: present
-
 - name: Ensure Influx Data signing key
   apt_key:
     url: "{{ influx.repo }}"
