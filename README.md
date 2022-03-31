@@ -1,4 +1,4 @@
-galaxy-telegraf
+galaxy-telegraf - stealed from https://stdio.space/ansible-galaxy/galaxy-telegraf/src/commit/41e4f237ccb55bc09542a70352c1e5be8ff93de5
 ===============
 
 Install Telegraf on Debian
